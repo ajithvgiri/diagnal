@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Diagnal</string>
     <string name="title_home">Romantic Comedy</string>
+    <string name="search">Search</string>
+    <string name="error_network_connection">No Internet Connection</string>
 </resources>
