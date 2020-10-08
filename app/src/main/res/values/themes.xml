@@ -12,5 +12,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="toolbarStyle">@style/Theme.Diagnal.Toolbar</item>
+    </style>
+
+    <style name="Theme.Diagnal.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="fontFamily">@font/titilliumweb_regular</item>
+        <item name="fontStyle">normal</item>
     </style>
 </resources>
