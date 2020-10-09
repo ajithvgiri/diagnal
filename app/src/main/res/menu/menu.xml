@@ -5,7 +5,6 @@
         android:id="@+id/appSearchBar"
         android:icon="@drawable/ic_search"
         android:title="@string/search"
-        android:actionLayout="@layout/layout_search_view"
-        app:showAsAction="ifRoom|withText"
-        app:actionViewClass="android.widget.SearchView"/>
+        app:showAsAction="ifRoom"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 </menu>

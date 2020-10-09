@@ -3,12 +3,18 @@ package com.ajithvgiri.diagnal.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ajithvgiri.diagnal.R
 import com.ajithvgiri.diagnal.data.model.Content
+import com.ajithvgiri.diagnal.utils.loadPoster
 import kotlinx.android.synthetic.main.layout_content_adapter.view.*
+import java.io.File
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ContentAdapter : PagingDataAdapter<Content, ContentAdapter.ContentViewHolder>(diffCallback) {
     companion object {
@@ -41,6 +47,8 @@ class ContentAdapter : PagingDataAdapter<Content, ContentAdapter.ContentViewHold
     class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(content: Content) {
             itemView.textViewTitle.text = content.name
+            itemView.imageView.loadPoster(content.poster_image)
         }
     }
+
 }

@@ -1,14 +1,13 @@
 package com.ajithvgiri.diagnal.ui.home
 
+import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.paging.filter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ajithvgiri.diagnal.R
 import com.ajithvgiri.diagnal.adapter.ContentAdapter
@@ -20,6 +19,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 class HomeFragment : BaseFragment() {
 
 
@@ -28,6 +28,7 @@ class HomeFragment : BaseFragment() {
     private val contentAdapter = ContentAdapter()
     private var coroutineJob: Job? = null
     private lateinit var homeViewModel: HomeViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +46,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initRecyclerView()
 
         if (uiHelper.getConnectivityStatus())
@@ -58,7 +60,12 @@ class HomeFragment : BaseFragment() {
          * Setup the adapter class for the RecyclerView
          * */
         recyclerView.apply {
-            layoutManager = GridLayoutManager(requireContext(), 3)
+            layoutManager =
+                if (requireActivity().resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    GridLayoutManager(requireContext(), 7)
+                } else {
+                    GridLayoutManager(requireContext(), 3)
+                }
             adapter = contentAdapter
         }
     }
@@ -118,5 +125,43 @@ class HomeFragment : BaseFragment() {
             progressBar.visibility = View.GONE
         else
             progressBar.visibility = View.VISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initRecyclerView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu, menu)
+
+        val searchItem = menu.findItem(R.id.appSearchBar)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText?.length ?: 0 > 2) {
+                    recyclerView.scrollToPosition(0)
+                    // Make sure we cancel the previous job before creating a new one
+                    coroutineJob?.cancel()
+                    coroutineJob = lifecycleScope.launch {
+                        homeViewModel.contentData.collect {
+                            contentAdapter.submitData(it.filter { content ->
+                                content.name.toLowerCase().trim()
+                                    .contains("${newText?.toLowerCase()}".trim())
+                            })
+                        }
+                    }
+                } else {
+                    subscribeObservers()
+                }
+                return true
+            }
+        })
     }
 }

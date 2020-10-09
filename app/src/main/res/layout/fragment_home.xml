@@ -6,26 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar"
-        style="@style/Theme.Diagnal.Toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/menu"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="@string/title_home" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -35,5 +23,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
