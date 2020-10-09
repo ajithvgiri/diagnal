@@ -22,4 +22,4 @@ Go to the [Firebase App Distribution](https://appdistribution.firebase.dev/i/e53
 ## Architecture
 The application is based on MVVM architecture and a repository pattern.
 
-![architecture](screenshots/mvvm.png)
+![architecture](mvvm.png)
