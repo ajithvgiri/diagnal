@@ -14,5 +14,5 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val contentDataSourceClass: ContentDataSourceClass) : ViewModel(){
 
     // for Kotlin Coroutines ---
-    val contentData = Pager(PagingConfig(pageSize = 20),pagingSourceFactory = {contentDataSourceClass}).flow.cachedIn(viewModelScope)
+    val contentData = Pager(PagingConfig(pageSize = 5,prefetchDistance = 5,enablePlaceholders = true),pagingSourceFactory = {contentDataSourceClass}).flow.cachedIn(viewModelScope)
 }
