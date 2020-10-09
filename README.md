@@ -1,7 +1,8 @@
 <h1 align="center">DIAGNAL PROGRAMMING TEST</h1>
 
 ## Download
-Go to the [Demo APK]() to download the latest APK.
+Go to the [Demo APK](https://github.com/ajithvgiri/diagnal/raw/master/demo/app-debug.apk) to download the latest APK.
+
 Go to the [Firebase App Distribution](https://appdistribution.firebase.dev/i/e53cfffe6e879ad3) to download get invite.
 
 ## Tech stack & Open-source libraries
